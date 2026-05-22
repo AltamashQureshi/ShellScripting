@@ -28,3 +28,4 @@ kubectl rollout undo deployment web-app --to-revision=1
 kubectl create secret generic db-credentials  --from-literal=DB_USER=admin --from-literal=DB_PASSWORD=SuperSecret123 --from-literal=DB_HOST=postgres.default.svc.cluster.local
 kubectl get secrets db-credentials -o yaml
 kubectl get secrets db-credentials -o jsonpath='{.data.DB_PASSWORD}'|base64 -d
+kubectl config set-context --current --namespace resource-lab
