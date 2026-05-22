@@ -14,8 +14,17 @@ kubectl diff -f pod.yaml
 kubectl apply -f pod.yaml
 kubectl run test-pod   --image=curlimages/curl   --restart=Never   -- curl http://web-app-clusterip
 kubectl run test-pod   --image=curlimages/curl   --restart=Never   -- curl http://web-app-clusterip
-
+kubectl scale deployment web-app --replicas=2
 minikube service web-app-nodeport  --url 10.100.76.226:30080
 minikube service service-name --url ip: port
 kubectl create deployment web-app --image=nginx:1.24 --replicas=4
+kubectl set image deployments web-app nginx=nginx:1.25
 kubectl rollout status deployment web-app
+kubectl rollout history deployment web-app
+kubectl annotate deployments.apps web-app kubernetes.io/change-cause='Update to nginx 1.25'
+kubectl set image deployments web-app nginx=nginx:this-does-not-exist
+kubectl rollout undo deployment web-app
+kubectl rollout undo deployment web-app --to-revision=1
+kubectl create secret generic db-credentials  --from-literal=DB_USER=admin --from-literal=DB_PASSWORD=SuperSecret123 --from-literal=DB_HOST=postgres.default.svc.cluster.local
+kubectl get secrets db-credentials -o yaml
+kubectl get secrets db-credentials -o jsonpath='{.data.DB_PASSWORD}'|base64 -d
