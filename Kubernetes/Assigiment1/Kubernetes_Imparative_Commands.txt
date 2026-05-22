@@ -7,3 +7,8 @@ kubectl get pod my-nginx -o jsonpath='{.status.podIP}'
 kubectl logs my-nginx
 kubectl exec -it my-nginx -- /bin/bash
 kubectl delete pod my-nginx
+kubectl get pods --show-labels 
+kubectl apply -f pod.yaml --dry-run=client
+kubectl apply -f pod.yaml --dry-run=server
+kubectl diff -f pod.yaml
+kubectl apply -f pod.yaml
