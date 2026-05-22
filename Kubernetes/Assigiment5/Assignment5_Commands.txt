@@ -1,0 +1,8 @@
+kubectl create deployment web-app --image=nginx:1.24 --replicas=4
+kubectl set image deployments web-app nginx=nginx:1.25
+kubectl rollout status deployment web-app
+kubectl rollout history deployment web-app
+kubectl annotate deployments.apps web-app kubernetes.io/change-cause='Update to nginx 1.25'
+kubectl set image deployments web-app nginx=nginx:this-does-not-exist
+kubectl rollout undo deployment web-app
+kubectl rollout undo deployment web-app --to-revision=1
