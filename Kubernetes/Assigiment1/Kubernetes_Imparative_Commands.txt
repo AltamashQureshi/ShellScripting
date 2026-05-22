@@ -12,3 +12,10 @@ kubectl apply -f pod.yaml --dry-run=client
 kubectl apply -f pod.yaml --dry-run=server
 kubectl diff -f pod.yaml
 kubectl apply -f pod.yaml
+kubectl run test-pod   --image=curlimages/curl   --restart=Never   -- curl http://web-app-clusterip
+kubectl run test-pod   --image=curlimages/curl   --restart=Never   -- curl http://web-app-clusterip
+
+minikube service web-app-nodeport  --url 10.100.76.226:30080
+minikube service service-name --url ip: port
+kubectl create deployment web-app --image=nginx:1.24 --replicas=4
+kubectl rollout status deployment web-app
