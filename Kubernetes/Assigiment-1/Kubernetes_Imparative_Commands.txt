@@ -1,0 +1,9 @@
+kubectl run my-nginx --image=nginx:latest --port=80
+ 
+kubectl get pod -o wide
+ 
+kubectl describe pod my-nginx
+kubectl get pod my-nginx -o jsonpath='{.status.podIP}'
+kubectl logs my-nginx
+kubectl exec -it my-nginx -- /bin/bash
+kubectl delete pod my-nginx
