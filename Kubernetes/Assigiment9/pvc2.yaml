@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: writer
+spec:
+  containers:
+  - name: writer
+    image: busybox
+    command: ['sh', '-c', 'echo Altamash World > /data/hello.txt && sleep 3600']
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /data
+
+  volumes:
+  - name: persistent-storage
+    persistentVolumeClaim:
+      claimName: my-pvc
